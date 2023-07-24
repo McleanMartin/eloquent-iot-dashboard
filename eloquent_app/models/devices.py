@@ -2,6 +2,7 @@ import binascii
 import os
 
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Device(models.Model):
@@ -9,6 +10,7 @@ class Device(models.Model):
     Requests for iot device Gateway
     """
     name = models.CharField(('Device Name'), max_length=60, help_text=('Device Name'))
+    owner = models.ForeignKey(User, verbose_name=("Owner"), on_delete=models.CASCADE)
     api_key = models.CharField(('Api key'), max_length=200, null=True, blank=True)  # api key
     description = models.TextField(('Description'), blank=True, max_length=255)
     enable = models.BooleanField(('Enable'), default=True)
